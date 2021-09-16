@@ -1,0 +1,7 @@
+variables:
+  terraformVersion: "0.15.3"
+
+  devBackendPath: backends/dev.tfvars
+  keyVaultName: "pxr-vault-eun"
+  keyVaultServiceConnectionDev: "PhlexRIM Development Azure DevOps"
+#  prodBackendPath: backends/prod.tfvars

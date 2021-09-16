@@ -1,0 +1,40 @@
+trigger: none
+
+variables:
+  - template: ./azure-pipelines-variables.yaml
+
+resources:
+  repositories:
+    - repository: templates
+      name: DevOps/DevOps.Pipelines.Templates
+      type: git
+
+jobs:
+  - template: Terraform/new-gated.yaml@templates
+    parameters:
+      environments:
+        - name: pxr_dev
+          terraformVersion: $(terraformVersion)
+          workingDirectory: environments/dev
+          backendConfigPath: $(devBackendPath)
+          keyVaultName: $(keyVaultName)
+          keyVaultServiceConnection: $(keyVaultServiceConnectionDev)          
+        - name: pxr_int
+          terraformVersion: $(terraformVersion)
+          workingDirectory: environments/integration
+          backendConfigPath: $(devBackendPath)
+          keyVaultName: $(keyVaultName)
+          keyVaultServiceConnection: $(keyVaultServiceConnectionDev)          
+        - name: pxs_dev
+          terraformVersion: $(terraformVersion)
+          workingDirectory: environments/pxs_dev
+          backendConfigPath: $(devBackendPath)
+          keyVaultName: $(keyVaultName)
+          keyVaultServiceConnection: $(keyVaultServiceConnectionDev)          
+        - name: pxs_int
+          terraformVersion: $(terraformVersion)
+          workingDirectory: environments/pxs_integration
+          backendConfigPath: $(devBackendPath)
+          keyVaultName: $(keyVaultName)
+          keyVaultServiceConnection: $(keyVaultServiceConnectionDev)          
+        
